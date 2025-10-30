@@ -16,11 +16,11 @@ public class UnboundedBlockingQueue<E> implements SimpleQueue<E> {
 
     public UnboundedBlockingQueue() { }
 
-    public boolean isEmpty() { return queue.isEmpty(); }
+    public synchronized boolean isEmpty() { return queue.isEmpty(); }
 
-    public int size() { return queue.size(); }
+    public synchronized int size() { return queue.size(); }
 
-    public E peek() { return queue.peek(); }
+    public synchronized E peek() { return queue.peek(); }
 
     public synchronized void enqueue(E element) {
         queue.add(element);

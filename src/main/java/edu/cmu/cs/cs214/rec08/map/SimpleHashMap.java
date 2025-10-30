@@ -62,8 +62,8 @@ public class SimpleHashMap<K, V> {
             throw new NullPointerException("Key can't be null.");
 
         int bucketIndex = hash(key);
-        synchronized (locks[bucketIndex]) {
-            List<Entry<K,V>> bucket = table.get(bucketIndex);
+        List<Entry<K,V>> bucket = table.get(bucketIndex);
+        synchronized (bucket) {
             for (Entry<K, V> e : bucket) {
                 if (e.key.equals(key)) {
                     V result = e.value;
@@ -85,8 +85,8 @@ public class SimpleHashMap<K, V> {
      */
     public V get(K key) {
         int bucketIndex = hash(key);
-        synchronized (locks[bucketIndex]) {
-            List<Entry<K,V>> bucket = table.get(bucketIndex);
+        List<Entry<K,V>> bucket = table.get(bucketIndex);
+        synchronized (bucket) {
             for (Entry<K, V> e : bucket) {
                 if (e.key.equals(key)) {
                     return e.value;
